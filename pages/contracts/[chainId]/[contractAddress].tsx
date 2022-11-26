@@ -68,6 +68,10 @@ function ContractFunctionForm({
     if (isReadable) handleCallReadFn(params);
     else handleCallWriteFn(params);
   };
+  useEffect(() => {
+    if (!isReadable) return;
+    handleCallReadFn([]);
+  }, [isReadable, handleCallReadFn]);
 
   return (
     <div className="py-4 sm:py-5 sm:px-6" id={contractFunction.name}>
@@ -104,23 +108,62 @@ function ContractFunctionForm({
         </div>
         <div className="flex justify-between items-center">
           <div>{result}</div>
-          <PrimaryButton type="submit">
-            {isReadable ? "Read" : "Write"}
-          </PrimaryButton>
+          {isReadable && contractFunction.inputs.length > 1 && (
+            <PrimaryButton type="submit">
+              {isReadable ? "Read" : "Write"}
+            </PrimaryButton>
+          )}
         </div>
       </form>
     </div>
   );
 }
+const classNames = (...classes: string[]) => {
+  return classes.filter(Boolean).join(" ");
+};
+
+const Icon = ({ className }: { className: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke="currentColor"
+    className={classNames("w-6 h-6", className)}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M3.75 6.75h16.5M3.75 12H12m-8.25 5.25h16.5"
+    />
+  </svg>
+);
 
 function ContractFunctionsTOC({ contractABI }: any) {
   const contractIface = new Interface(contractABI);
   const functions = Object.entries(contractIface.functions);
   return (
     <ul>
+      <a
+        className={classNames(
+          "text-gray-900",
+          "group flex items-center py-2 text-sm font-medium rounded-md"
+        )}
+      >
+        <Icon
+          className={classNames("flex-shrink-0 mr-3 h-6 w-6")}
+          aria-hidden="true"
+        />
+        <span className="truncate">{"Functions"}</span>
+      </a>
       {functions.map(([key, fn]) => (
-        <li key={key}>
-          <a href={`#${fn.name}`}>{fn.name}</a>
+        <li
+          key={key}
+          className="list-disc ml-4 text-sm font-medium text-gray-500 hover:text-gray-700 "
+        >
+          <a href={`#${fn.name}`} className="">
+            {fn.name}
+          </a>
         </li>
       ))}
     </ul>
@@ -173,7 +216,7 @@ function ContractDetails({
       <aside className="sticky h-screen top-0">
         <ContractFunctionsTOC contractABI={contractDetails?.ABI || []} />
       </aside>
-      <main className="overflow-hidden bg-white shadow sm:rounded-lg w-full">
+      <main className="overflow-hidden bg-white shadow sm:rounded-lg w-full ">
         <div className="px-4 py-5 sm:px-6 flex justify-between">
           <div>
             <h3 className="text-lg font-medium leading-6 text-gray-900">

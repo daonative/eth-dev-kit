@@ -13,7 +13,10 @@ const ETHERSCAN_CONFIG = {
   },
 };
 
-export async function getContractDetails(chainId: ChainID, contractAddress: Address) {
+export async function getContractDetails(
+  chainId: ChainID,
+  contractAddress: Address
+) {
   const { domain, apiKey } = ETHERSCAN_CONFIG[chainId];
   const url = `https://${domain}/api?module=contract&action=getsourcecode&address=${contractAddress}&apikey=${apiKey}`;
   const result = await axios.get(url);
