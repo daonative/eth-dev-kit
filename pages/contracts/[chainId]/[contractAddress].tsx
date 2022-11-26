@@ -70,8 +70,9 @@ function ContractFunctionForm({
   };
   useEffect(() => {
     if (!isReadable) return;
+    if (contractFunction.inputs.length !== 0) return;
     handleCallReadFn([]);
-  }, [isReadable, handleCallReadFn]);
+  }, [isReadable, handleCallReadFn, contractFunction.inputs.length]);
 
   return (
     <div className="py-4 sm:py-5 sm:px-6" id={contractFunction.name}>
