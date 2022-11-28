@@ -6,7 +6,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useNetwork } from "wagmi";
 import { useRouter } from "next/router";
 
-function Search() {
+export function Search() {
   const { push } = useRouter();
   const { register, handleSubmit } = useForm();
   const { chain } = useNetwork();
@@ -54,17 +54,12 @@ export default function Header() {
                 alt=""
               />
             </Link>
-            <div className="ml-10 w-[32rem] hidden lg:block">
+            <div className="ml-10 w-[32rem] ">
               <Search />
             </div>
           </div>
           <div className="ml-10 space-x-4">
             <ConnectButton showBalance={false} />
-          </div>
-        </div>
-        <div className="flex flex-wrap justify-center lg:hidden">
-          <div className="max-w-[32rem] w-full">
-            <Search />
           </div>
         </div>
       </nav>

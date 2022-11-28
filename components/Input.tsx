@@ -22,7 +22,7 @@ export const Label = ({ className, children, optional = false }: any) => (
   <div className="flex justify-between">
     <label
       className={classNames(
-        "block pb-1 text-sm text-sm font-medium text-gray-700",
+        "block pb-1 text-sm font-medium text-gray-700",
         className
       )}
     >
