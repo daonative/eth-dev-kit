@@ -31,8 +31,8 @@ export function ContractDetails({
   if (!isLoading && !contractDetails) return <>UnkownContract</>;
 
   return (
-    <div className="flex gap-6 lg:w-4/5 m-auto">
-      <aside className="sticky h-screen top-0">
+    <div className="flex gap-6 lg:w-4/5 m-auto ">
+      <aside className="sticky h-screen top-0 bg-gray-50 px-2">
         <ContractFunctionsTOC contractABI={contractDetails?.ABI || []} />
       </aside>
       <main className="shadow sm:rounded-lg w-full ">
@@ -50,7 +50,7 @@ export function ContractDetails({
           </div>
         </div>
         <div className="border-t border-gray-200 px-4 py-5 sm:p-0">
-          <div className="sm:divide-y sm:divide-gray-200">
+          <div className="">
             <ContractFunctions
               contractABI={contractDetails?.ABI || []}
               contractAddress={contractAddress}

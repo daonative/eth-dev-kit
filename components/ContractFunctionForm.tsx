@@ -9,6 +9,7 @@ import { getProvider } from "@/lib/provider";
 import Badge from "@/components/Badge";
 import { PrimaryButton } from "@/components/Button";
 import { Label, Input } from "@/components/Input";
+import { classNames } from "@/lib/utils";
 
 export function ContractFunctionForm({
   contractAddress,
@@ -69,22 +70,24 @@ export function ContractFunctionForm({
 
   return (
     <div
-      className="transition duration-300 target:ease-in-out py-4 sm:py-5 sm:px-6 target:scale-[110%] bg-white target:shadow-lg rounded-md"
+      className="transition duration-300 target:ease-in-out py-4 sm:py-5 px-6 target:scale-[110%] bg-white target:shadow-lg rounded-md border border-top border-gray-200 target:mt-[-70px]"
       id={contractFunction.name}
     >
-      <div className="flex justify-between items-center">
-        <h3 className="text-sm font-medium text-gray-500">
-          {name} {outputs && <>({outputs})</>}
-        </h3>
-        <div className="flex gap-2">
-          {isReadable ? (
-            <Badge className="bg-green-100">Read</Badge>
-          ) : (
-            <Badge className="bg-red-100">Write</Badge>
-          )}
-          {isPayable && <Badge className="bg-green-100">Read</Badge>}
+      <a href={`#${contractFunction.name}`} className="block">
+        <div className="flex justify-between items-center">
+          <h3 className="text-sm font-medium text-gray-500">
+            {name} {outputs && <>({outputs})</>}
+          </h3>
+          <div className="flex gap-2">
+            {isReadable ? (
+              <Badge className="bg-green-100">Read</Badge>
+            ) : (
+              <Badge className="bg-red-100">Write</Badge>
+            )}
+            {isPayable && <Badge className="bg-green-100">Read</Badge>}
+          </div>
         </div>
-      </div>
+      </a>
       <form onSubmit={handleSubmit(handleCallFn)}>
         <div className="py-3 flex flex-col gap-2">
           {contractFunction.inputs.map((input, index) => {

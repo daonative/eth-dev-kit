@@ -38,7 +38,10 @@ export default function ContractPage() {
   return (
     <>
       <Header />
-      <ContractDetails contractAddress={contractAddress} chainId={chainId} />
+         <ContractDetails
+            contractAddress={contractAddress}
+            chainId={chainId}
+          />
     </>
   );
 }

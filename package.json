@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.4",
     "@heroicons/react": "^2.0.13",
     "@rainbow-me/rainbowkit": "^0.7.4",
     "@types/node": "18.11.9",
