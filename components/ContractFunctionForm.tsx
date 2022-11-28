@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { Address, useSigner } from "wagmi";
 import { useAddRecentTransaction } from "@rainbow-me/rainbowkit";
@@ -32,16 +32,18 @@ export function ContractFunctionForm({
     .join(",");
   const isReadable = contractFunction.constant;
   const isPayable = contractFunction.payable;
-
-  const handleCallReadFn = async (params: Array<string>) => {
-    const contract = new Contract(
-      contractAddress,
-      [contractFunction],
-      provider
-    );
-    const result = await contract[contractFunction.name](...params);
-    setResult(result.toString());
-  };
+  const handleCallReadFn = useCallback(
+    async (params: Array<string>) => {
+      const contract = new Contract(
+        contractAddress,
+        [contractFunction],
+        provider
+      );
+      const result = await contract[contractFunction.name](...params);
+      setResult(result.toString());
+    },
+    [contractAddress, provider, contractFunction]
+  );
 
   const handleCallWriteFn = async (params: Array<string>) => {
     if (!signer) return;
@@ -66,6 +68,7 @@ export function ContractFunctionForm({
     if (!isReadable) return;
     if (contractFunction.inputs.length !== 0) return;
     handleCallReadFn([]);
+    console.log("yo");
   }, [isReadable, handleCallReadFn, contractFunction.inputs.length]);
 
   return (
@@ -108,7 +111,7 @@ export function ContractFunctionForm({
         </div>
         <div className="flex justify-between items-center">
           <div>{result}</div>
-          {isReadable && contractFunction.inputs.length > 1 && (
+          {isReadable && contractFunction.inputs.length > 0 && (
             <PrimaryButton type="submit">
               {isReadable ? "Read" : "Write"}
             </PrimaryButton>

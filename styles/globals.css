@@ -5,6 +5,8 @@
 body {
   background: #fafafa;
   scroll-margin-top: 2em;
+}
 
-
+html,  body,  #__next, #__next > div {
+  height: 100%;
 }
