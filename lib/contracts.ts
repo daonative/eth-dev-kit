@@ -11,6 +11,10 @@ const ETHERSCAN_CONFIG = {
     domain: "api-goerli.etherscan.io",
     apiKey: process.env.NEXT_PUBLIC_ETHERSCAN_GOERLI_API_KEY,
   },
+  137: {
+    domain: "api.polygonscan.com",
+    apiKey: process.env.NEXT_PUBLIC_ETHERSCAN_POLYGON_API_KEY,
+  },
 };
 
 export async function getContractDetails(

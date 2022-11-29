@@ -1,4 +1,4 @@
-export type ChainID = 1 | 5
+export type ChainID = 1 | 5 | 137
 export type ContractDetails = {
   sourceCode: any,
   ABI: any,
