@@ -15,6 +15,10 @@ const ETHERSCAN_CONFIG = {
     domain: "api.polygonscan.com",
     apiKey: process.env.NEXT_PUBLIC_ETHERSCAN_POLYGON_API_KEY,
   },
+  100: {
+    domain: 'api.gnosisscan.io', 
+    apiKey: process.env.NEXT_PUBLIC_GNOSISSCAN_API_KEY
+  }
 };
 
 export async function getContractDetails(
