@@ -27,6 +27,7 @@ export default function Search() {
           >
             <option value={1}>Ethereum</option>
             <option value={137}>Polygon</option>
+            <option value={137}>Gnosis</option>
           </select>
         </div>
         <input
